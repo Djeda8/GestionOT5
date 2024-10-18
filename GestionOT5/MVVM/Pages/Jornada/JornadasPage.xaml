@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.Jornada"
+             x:Class="GestionOT5.MVVM.Pages.Jornada.JornadasPage"
+             x:DataType="viewmodels:JornadasViewModel">
+    <Shell.TitleView>
+        <Label
+            Text="Jornada"
+            Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <Grid RowDefinitions=".9*,auto" Padding="10">
+        <Image Grid.Row="0" Source="fondo.png" Style="{StaticResource BackgroundImg}" />
+        <VerticalStackLayout Grid.Row="0" Spacing="100" VerticalOptions="Center" Padding="10">
+            <Button Text="Iniciar Jornada" Command="{Binding IniciarJornadaCommand}"/>
+            <Button Text="Finalizar Jornada" Command="{Binding FinalizarJornadaCommand}" />
+            <Label Text="{Binding Mess_1}"/>
+        </VerticalStackLayout>
+                <Label Grid.Row="2" Text="1.0.0 (local) - dev" Style="{StaticResource Version}"/>
+    </Grid>
+</ContentPage>

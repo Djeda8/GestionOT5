@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GestionOT5.MVVM.Pages.Login.LoginPage"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.Login"
+             x:DataType="viewmodels:LoginViewModel"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+    <Grid RowDefinitions=".5*,.4*,auto" Padding="10">
+        <Image Grid.Row="0" Source="logo.png"  VerticalOptions="Center" />
+        <Image Grid.Row="0" Grid.RowSpan="2" Source="fondo.png" Style="{StaticResource BackgroundImg}" />
+        <VerticalStackLayout Grid.Row="1" Spacing="40">
+            <Entry Placeholder="user" Text="{Binding User}" />
+            <Entry Placeholder="password" Text="{Binding Password}"/>
+            <Button Text="Login" Command="{Binding LoginCommand}" />
+        </VerticalStackLayout>
+        <Label Grid.Row="2" Text="1.0.0 (local) - dev" Style="{StaticResource Version}"/>
+    </Grid>
+</ContentPage>

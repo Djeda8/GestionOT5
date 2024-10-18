@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.Incidencias"
+             xmlns:models="clr-namespace:GestionOT5.MVVM.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodels:IncidenciasViewModel"
+             x:Class="GestionOT5.MVVM.Pages.Incidencias.IncidenciasPage">
+    <Shell.TitleView>
+        <Label
+            Text="Incidencias"
+            Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <Grid RowDefinitions="auto,auto,*,auto" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="0" Background="{StaticResource Gray100}">
+        <StackLayout Background="white" Grid.Row="0">
+            <FlexLayout JustifyContent="SpaceBetween" AlignContent="Stretch" Margin="10" >
+                <Button Style="{StaticResource SquareButton}" Command="{Binding BackCommand}" >
+                    <Button.ImageSource>
+                        <FontImageSource
+                      FontFamily="Icons"
+                      Glyph="{x:Static utilities:IconFont.Exit}"
+                      Color="white" />
+                    </Button.ImageSource>
+                </Button>
+                <Button Style="{StaticResource SquareButton}" Command="{Binding VisualiceIncidenciaCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource
+                      FontFamily="Icons"
+                      Glyph="{x:Static utilities:IconFont.Eye}"
+                      Color="white" />
+                    </Button.ImageSource>
+                </Button>
+                <Button Style="{StaticResource SquareButton}">
+                    <Button.ImageSource>
+                        <FontImageSource
+                      FontFamily="Icons"
+                      Glyph="{x:Static utilities:IconFont.Delete}"
+                      Color="white" />
+                    </Button.ImageSource>
+                </Button>
+                <Button Style="{StaticResource SquareButton}" Command="{Binding GoNewIncidenceCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource
+                      FontFamily="Icons"
+                      Glyph="{x:Static utilities:IconFont.Plus}"
+                      Color="white" />
+                    </Button.ImageSource>
+                </Button>
+            </FlexLayout>
+        </StackLayout>
+        <Label Grid.Row="1" Grid.Column="0" Margin="10,10,10,0" Text="Listado de incidencias" Style="{StaticResource FormLabel}" />
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding IncidenciasList}"
+                        SelectedItem="{Binding SelectedIncidencia}"
+                        SelectionMode="Single"
+                        Background="White">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                            Orientation="Vertical"
+                            VerticalItemSpacing="3">
+                </GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Incidencia">
+                    <Border Padding="0" Margin="10,3,10,0" Style="{StaticResource borderFlashCard}" >
+                        <Grid 
+                            Padding="0"
+                            Margin="15,10,15,0"
+                            ColumnDefinitions="*"
+                            RowDefinitions="*">
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Descripcion}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Label Grid.Row="3" Text="1.0.0 (local) - dev" Style="{StaticResource Version}" VerticalTextAlignment="End" HeightRequest="20" Padding="-5"/>
+    </Grid>
+</ContentPage>

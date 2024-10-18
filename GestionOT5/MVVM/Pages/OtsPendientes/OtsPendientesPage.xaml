@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.OtsPendientes"
+             xmlns:models="clr-namespace:GestionOT5.MVVM.Models"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             x:Class="GestionOT5.MVVM.Pages.OtsPendientes.OtsPendientesPage"
+             x:DataType="viewmodels:OtsPendientesViewModel">
+    <Shell.TitleView>
+        <Grid ColumnDefinitions=".2*,.8*">
+            <Label
+                Grid.Column="0"
+                FontFamily="Icons"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="{x:Static utilities:IconFont.Search}"
+                TextColor="{StaticResource Gray500}"
+                VerticalOptions="Center">
+            </Label>
+            <Entry FontSize="20"
+                   VerticalOptions="Center"
+                   Placeholder="Introduce cadena a buscar"
+                   Text="{Binding SearchText}" Grid.ColumnSpan="2"
+                   Margin="50,0,10,0">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="TextChanged"
+                        Command="{Binding ReloadCommand}" />
+                </Entry.Behaviors>
+            </Entry>
+        </Grid>
+    </Shell.TitleView>
+    <Grid RowDefinitions="*,auto" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="0" Background="{StaticResource Gray100}">
+        <RefreshView Grid.Row="0" IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Ots}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedOT,Mode=Default}"
+                SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                Background="White">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                    Orientation="Vertical"
+                    VerticalItemSpacing="3">
+                    </GridItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Ot">
+                        <Border Padding="0" Margin="10,3,10,0" Style="{StaticResource borderFlashCard}" >
+                            <Grid 
+                            Padding="0"
+                            Margin="15,10,15,0"
+                            ColumnDefinitions=".21*,.29*,.13*,.37*"
+                            RowDefinitions="*,*,*,*,*,*">
+                                <Label Grid.Row="0" Grid.Column="0" Text="Número:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Numero}"/>
+
+                                <Label Grid.Row="0" Grid.Column="2" Text="Serie:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="0" Grid.Column="3" Text="{Binding Serie}" />
+
+                                <Label Grid.Row="1" Grid.Column="0" Text="Tipo:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Tipo}" Grid.ColumnSpan="2" />
+
+                                <Label Grid.Row="2" Grid.Column="0" Text="Cliente:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Cliente}" Grid.ColumnSpan="3" />
+
+                                <Label Grid.Row="3" Grid.Column="0" Text="Dirección:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Direccion}" Grid.ColumnSpan="2" />
+
+                                <Label Grid.Row="4" Grid.Column="0" Text="Fecha:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="4" Grid.Column="1" Text="{Binding Fecha, StringFormat='{0:dd-MM-yyyy}'}"/>
+
+                                <Label Grid.Row="4" Grid.Column="2" Text="Hora:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="4" Grid.Column="3" Text="{Binding Fecha, StringFormat='{0:HH:mm}' }" />
+
+                                <Label Grid.Row="5" Grid.Column="0" Text="Estado:" Style="{StaticResource ListLabel}"/>
+                                <Label Grid.Row="5" Grid.Column="1" Text="{Binding Estado}" Grid.ColumnSpan="2" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Label Grid.Row="1" Text="1.0.0 (local) - dev" Style="{StaticResource Version}"/>
+    </Grid>
+</ContentPage>

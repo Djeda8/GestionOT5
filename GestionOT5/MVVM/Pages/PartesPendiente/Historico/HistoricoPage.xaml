@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GestionOT5.MVVM.Pages.PartesPendiente.Historico.HistoricoPage"
+             Title="Historico">
+    <Shell.TitleView>
+        <Label
+            Text="Historico"
+            Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to Historico"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

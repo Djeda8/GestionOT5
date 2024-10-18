@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GestionOT5.MVVM.Pages.PartesPendiente.Parte.PartePPage"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.PartesPendiente"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             Title="Parte"
+             x:DataType="viewmodels:PartesPendienteViewModel">
+    <Shell.TitleView>
+        <Label
+            Text="Parte"
+            Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <Grid RowDefinitions="auto,.9*,auto" Padding="10"  Background="{StaticResource Gray100}">
+        <!--<Image Grid.Row="0" Grid.RowSpan="2" Source="fondo.png" Style="{StaticResource BackgroundImg}" />-->
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="EndAndExpand" Padding="10" BackgroundColor="White">
+            <Button Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.User}"
+                        Color="white"/>
+                </Button.ImageSource>
+            </Button>
+            <Button Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Calendar}"
+                        Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Command="{Binding OkCommand}" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Ok}"
+                        Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="StartAndExpand" Padding="10"  BackgroundColor="white">
+            <Button Grid.Row="0" Command="{Binding OkCommand}" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Left}"
+                        Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <Grid Grid.Row="1" VerticalOptions="StartAndExpand"
+              Padding="10"
+              Margin="0,10,0,0"
+              RowSpacing="7"
+              ColumnDefinitions=".35*,.50*,.15*"
+              RowDefinitions="*,*,*,*,*,*,*,*,*,*,*"
+              BackgroundColor="white">
+            <Label Grid.Row="0" Grid.Column="0" Text="Parte" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding OtDto.OtKey}" Style="{StaticResource FormData}" />
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Responsable" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="Daniel Ojeda Ubeda" Style="{StaticResource FormData}"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Text="Tecnico" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="2" Grid.Column="1" Text="Samuel Antonio" Style="{StaticResource FormData}"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Text="Cliente" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding OtDto.Cliente}" Style="{StaticResource FormData}"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Text="Direccion" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="4" Grid.Column="1" Text="{Binding OtDto.Direccion}" Style="{StaticResource FormData}"/>
+            <Button Grid.Row="4" Grid.Column="2" Command="{Binding GoMapCommand}" Style="{StaticResource SquareButton}" HeightRequest="40" WidthRequest="40">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Plus}"
+                        Color="white" 
+                        />
+                </Button.ImageSource>
+            </Button>
+
+            <Label Grid.Row="5" Grid.Column="0" Text="Población" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="5" Grid.Column="1" Text="Valencia" Style="{StaticResource FormData}"/>
+
+            <Label Grid.Row="6" Grid.Column="0" Text="Fecha interv."  Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="6" Grid.Column="1" Text="{Binding OtDto.Fecha}" Style="{StaticResource FormData}"/>
+            
+            <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="Descripción del mantenimiento" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Text="Sin deninir" Style="{StaticResource FormData}"/>
+
+            <Label Grid.Row="9" Grid.Column="0"  Grid.ColumnSpan="2" Text="Descripción del servicio"  Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Text="Sin definir" Style="{StaticResource FormData}"/>
+        </Grid>
+        <Label Grid.Row="2" Text="1.0.0 (local) - dev" Style="{StaticResource Version}"/>
+    </Grid>
+</ContentPage>

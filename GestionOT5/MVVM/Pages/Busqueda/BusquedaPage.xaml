@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GestionOT5.MVVM.Pages.Busqueda.BusquedaPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.Busqueda"
+             xmlns:models="clr-namespace:GestionOT5.MVVM.Models"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             x:DataType="viewmodels:BusquedaViewModel">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"></BackButtonBehavior>
+    </Shell.BackButtonBehavior>
+    <Shell.TitleView>
+        <Grid ColumnDefinitions=".2*,.8*">
+            <Label
+                Grid.Column="0"
+                FontFamily="Icons"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="{x:Static utilities:IconFont.Search}"
+                TextColor="{StaticResource Gray500}"
+                VerticalOptions="Center">
+            </Label>
+            <Entry FontSize="20"
+                   VerticalOptions="Center"
+                   Placeholder="Introduce cadena a buscar"
+                   Text="{Binding SearchText}" Grid.ColumnSpan="2"
+                   Margin="50,0,10,0">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        EventName="TextChanged"
+                        Command="{Binding ReloadCommand}" />
+                </Entry.Behaviors>
+            </Entry>
+        </Grid>
+    </Shell.TitleView>
+    <Grid RowDefinitions="*,auto" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="0" Background="{StaticResource Gray100}">
+        <CollectionView 
+                ItemsSource="{Binding Materiales}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedMaterial,Mode=TwoWay}"
+                SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                Background="White">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+         Orientation="Vertical"
+         VerticalItemSpacing="3">
+                </GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Material">
+                    <Border Padding="0" Margin="10,3,10,0" Style="{StaticResource borderFlashCard}" >
+                        <Grid 
+                 Padding="0"
+                 Margin="15,10,15,0">
+                            <Label Grid.Column="0" Text="{Binding Descripcion}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

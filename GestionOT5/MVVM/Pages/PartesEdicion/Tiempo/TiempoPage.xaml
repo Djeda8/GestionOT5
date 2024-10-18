@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.PartesEdicion"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodels:PartesEdicionViewModel"
+             x:Class="GestionOT5.MVVM.Pages.PartesEdicion.Tiempo.TiempoPage">
+    <ContentPage.Resources>
+        <Style Class="GreenButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Green" />
+        </Style>
+        <Style Class="YellowButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Gold" />
+        </Style>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Shell.TitleView>
+        <Label
+            Text="Tiempo"
+            Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <Grid RowDefinitions="auto,.9*,auto" Padding="10">
+        <Image Grid.Row="0" Grid.RowSpan="2" Source="fondo.png" Style="{StaticResource BackgroundImg}" />
+
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="StartAndExpand" Padding="10" IsVisible="{Binding Started, Converter={StaticResource InvertedBoolConverter}}">
+            <Button Grid.Row="0" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Left}"
+                    Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="0" Spacing="10" HorizontalOptions="Start" Padding="10" IsVisible="{Binding Started}">
+            <Button Grid.Row="0" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Calendar}"
+                    Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Grid.Row="0" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Pencil}"
+                    Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Grid.Row="0" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Doc}"
+                    Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="End" Padding="10" IsVisible="{Binding Started}">
+            <Button Grid.Row="0" Style="{StaticResource SquareButton}" Command="{Binding GoToParteCommand}" CommandParameter="ParteEPage">
+                <Button.ImageSource>
+                    <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Right}"
+                    Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="1" VerticalOptions="StartAndExpand"
+            Padding="10"
+            RowSpacing="7"
+            ColumnDefinitions=".45*,.55*"
+            RowDefinitions="*,*">
+            <Label Grid.Row="0" Grid.Column="0" Text="Parte" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding OtDto.OtKey}" Style="{StaticResource FormData}" />
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Tiempo invertido" Style="{StaticResource FormLabel}"/>
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Horaminuto}" Style="{StaticResource FormData}"/>
+        </Grid>
+        <HorizontalStackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Started, Converter={StaticResource InvertedBoolConverter}}">
+            <Button Command="{Binding StartCommand}"  Style="{StaticResource SquareButton}" StyleClass="GreenButton" HorizontalOptions="End" CornerRadius="0">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Play}"
+                        Color="White" />
+                </Button.ImageSource>
+            </Button>
+            <Button Text="Inicio trabajo" Command="{Binding StartCommand}" CornerRadius="0" WidthRequest="200" ></Button>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Started}">
+            <Button Command="{Binding PauseCommand}" Style="{StaticResource SquareButton}" StyleClass="YellowButton" HorizontalOptions="End" CornerRadius="0">
+                <Button.ImageSource>
+                    <FontImageSource
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Pause}"
+                        Color="White" />
+                </Button.ImageSource>
+            </Button>
+            <Button Text="Pausar trabajo" Command="{Binding PauseCommand}" CornerRadius="0" WidthRequest="200" ></Button>
+        </HorizontalStackLayout>
+        <Label Grid.Row="3" Text="1.0.0 (local) - dev" Style="{StaticResource Version}"/>
+    </Grid>
+</ContentPage>

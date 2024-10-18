@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GestionOT5.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GestionOT5"
+    xmlns:login="clr-namespace:GestionOT5.MVVM.Pages.Login"
+    xmlns:jornada="clr-namespace:GestionOT5.MVVM.Pages.Jornada"
+    xmlns:otsPendientes="clr-namespace:GestionOT5.MVVM.Pages.OtsPendientes"
+    xmlns:otsFinalizadas="clr-namespace:GestionOT5.MVVM.Pages.OtsFinalizadas"
+    xmlns:agenda="clr-namespace:GestionOT5.MVVM.Pages.Agenda"
+    xmlns:partesPendienteParte="clr-namespace:GestionOT5.MVVM.Pages.PartesPendiente.Parte"
+    xmlns:partesPendienteHistorico="clr-namespace:GestionOT5.MVVM.Pages.PartesPendiente.Historico"
+    xmlns:partesEdicionTiempo="clr-namespace:GestionOT5.MVVM.Pages.PartesEdicion.Tiempo"
+    xmlns:partesEdicionParte="clr-namespace:GestionOT5.MVVM.Pages.PartesEdicion.Parte"
+    xmlns:partesEdicionMateriales="clr-namespace:GestionOT5.MVVM.Pages.PartesEdicion.Materiales"
+    xmlns:partesEdicionTecnicos="clr-namespace:GestionOT5.MVVM.Pages.PartesEdicion.Tecnicos"
+    xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+    Shell.BackgroundColor="{StaticResource BackgroundColor}">
+
+    <!--<Shell.TitleView>
+        <Grid BackgroundColor="White">
+           
+            --><!--<Label
+                Grid.Column="1"
+                FontFamily="Icons"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="{}"
+                TextColor="#929292"
+                VerticalOptions="Center" />--><!-- 
+            <Image
+                HorizontalOptions="Center"
+                Source="logo.png"
+                VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>-->
+
+    <Shell.FlyoutBackdrop>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0.1" Color="brown" />
+            <GradientStop Offset="0.6" Color="White" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>
+
+    <Shell.FlyoutIcon>
+        <FontImageSource
+            FontFamily="Icons"
+            Glyph="{x:Static utilities:IconFont.Menu}"
+            Color="{StaticResource IconColor}" />
+    </Shell.FlyoutIcon>
+
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="White" HeightRequest="100">
+            <Image
+                Aspect="AspectFit"
+                Source="logo.jpg" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutFooter>
+        <Grid
+            Padding="15"
+            BackgroundColor="{StaticResource Footer}"
+            HeightRequest="100"
+            RowDefinitions="*,*">
+            <Label
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Text="Powered by:"
+                TextColor="{StaticResource Gray600}" />
+            <Label
+                Grid.Row="1"
+                FontAttributes="Bold"
+                FontSize="25"
+                HorizontalOptions="Center"
+                Text=".NET MAUI"
+                TextColor="{StaticResource Gray600}" />
+        </Grid>
+    </Shell.FlyoutFooter>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid
+                ColumnDefinitions=".2*, .8*"
+                HeightRequest="75"
+                RowSpacing="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="background" Property="Rectangle.Fill" Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter TargetName="background" Property="Rectangle.Fill" Value="Orange" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                
+                <Image
+                    HeightRequest="30"                    
+                    Source="{Binding FlyoutIcon}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    Margin="20,0,0,0"
+                    FontSize="17"
+                    FontAttributes="Bold"
+                    Text="{Binding Title}"
+                    TextColor="{StaticResource TitleColor}"
+                    VerticalOptions="Center" />
+                <Rectangle x:Name="background"
+                    Grid.ColumnSpan="2"
+                    Fill="{StaticResource Gray200}"
+                    Opacity=".1" />
+            </Grid>
+
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid
+                ColumnDefinitions=".2*, .8*"
+                HeightRequest="75"
+                RowSpacing="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="background" Property="Rectangle.Fill" Value="White" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter TargetName="background" Property="Rectangle.Fill" Value="Orange" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Image
+                    HeightRequest="30"                    
+                    Source="{Binding FlyoutIcon}"
+                    VerticalOptions="Center" />
+                <Label
+                    Grid.Column="1"
+                    Margin="20,0,0,0"
+                    FontSize="17"
+                    Text="{Binding Title}"
+                    TextColor="Black"
+                    VerticalOptions="Center" />
+                <Rectangle x:Name="background"
+                    Grid.ColumnSpan="2"
+                    Fill="{StaticResource Gray200}"
+                    Opacity=".1" />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+    <FlyoutItem Route="Login" FlyoutItemIsVisible="False">
+        <ShellContent Title="Login"
+                ContentTemplate="{DataTemplate login:LoginPage}"
+                Route="LoginPage" >
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Jornada" Route="Jornada">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Tablet}"
+                    Color="{StaticResource IconColor}" />
+        </FlyoutItem.Icon>
+        <ShellContent Title="Jornada"
+                ContentTemplate="{DataTemplate jornada:JornadasPage}"
+                Route="JornadasPage" >
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Ots Pendientes" Route="OtsPendientes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Edit}"
+                Color="{StaticResource IconColor}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+           ContentTemplate="{DataTemplate otsPendientes:OtsPendientesPage}"
+           Route="OtsPendientesPage" >
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Ots Finalizadas" Route="OtsFinalizadas">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                 FontFamily="Icons"
+                 Glyph="{x:Static utilities:IconFont.Doc}"
+                 Color="{StaticResource IconColor}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+           ContentTemplate="{DataTemplate otsFinalizadas:OtsFinalizadasPage}"
+           Route="OtsFinalizadasPage" >
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Agenda" Route="Agenda">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Calendar}"
+                Color="{StaticResource IconColor}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+           ContentTemplate="{DataTemplate agenda:AgendaPage}"
+           Route="AgendaPage" >
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Partes Pendiente" Route="PartesPendiente">
+        <ShellContent
+           Title="Parte"
+           ContentTemplate="{DataTemplate partesPendienteParte:PartePPage}"
+           Route="PartePPage" >
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Doc}"
+                    Color="{StaticResource IconColor}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+           Title="Histórico"
+           ContentTemplate="{DataTemplate partesPendienteHistorico:HistoricoPage}"
+           Route="HistoricoPage" >
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Calendar}"
+                    Color="{StaticResource IconColor}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Partes Edicion" Route="PartesEdicion">
+        <ShellContent
+           Title="Tiempo"
+           ContentTemplate="{DataTemplate partesEdicionTiempo:TiempoPage}"
+           Route="TiempoPage" >
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Stopwatch}"
+                    Color="{StaticResource IconColor}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+           Title="Parte"
+           ContentTemplate="{DataTemplate partesEdicionParte:ParteEPage}"
+           Route="ParteEPage" >
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Doc}"
+                    Color="{StaticResource IconColor}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+           Title="Materiales"
+           ContentTemplate="{DataTemplate partesEdicionMateriales:MaterialesPage}"
+           Route="MaterialesPage" >
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.Cart}"
+                    Color="{StaticResource IconColor}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent
+           Title="Técnicos"
+           ContentTemplate="{DataTemplate partesEdicionTecnicos:TecnicosPage}"
+           Route="TecnicosPage" >
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="Icons"
+                    Glyph="{x:Static utilities:IconFont.User}"
+                    Color="{StaticResource IconColor}" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </FlyoutItem>
+
+    <MenuItem Command="{Binding LogoutCommand}" Text="Logout">
+        <MenuItem.IconImageSource>
+            <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Exit}"
+                Color="{StaticResource IconColor}" />
+        </MenuItem.IconImageSource>
+    </MenuItem>
+
+
+
+</Shell>

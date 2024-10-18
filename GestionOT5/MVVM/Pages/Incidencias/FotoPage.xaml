@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.Incidencias"
+             xmlns:models="clr-namespace:GestionOT5.MVVM.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodels:FotoViewModel"
+             x:Class="GestionOT5.MVVM.Pages.Incidencias.FotoPage">
+    <Shell.TitleView>
+        <Label
+        Text="Foto"
+        Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <Grid RowDefinitions="auto,*,auto" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="0" Background="{StaticResource Gray100}">
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="EndAndExpand" Padding="10" BackgroundColor="White">
+            <Button Style="{StaticResource SquareButton}" Command="{Binding TakePhotoCommand}" CommandParameter="Take">
+                <Button.ImageSource>
+                    <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Camera}"
+                Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Style="{StaticResource SquareButton}" Command="{Binding TakePhotoCommand}" CommandParameter="Pick">
+                <Button.ImageSource>
+                    <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Attach}"
+                Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Style="{StaticResource SquareButton}" Command="{Binding AceptCommand}">
+                <Button.ImageSource>
+                    <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Ok}"
+                Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="0" Spacing="5" HorizontalOptions="StartAndExpand" Padding="10"  BackgroundColor="white">
+            <Button Grid.Row="0" Style="{StaticResource SquareButton}">
+                <Button.ImageSource>
+                    <FontImageSource
+                FontFamily="Icons"
+                Glyph="{x:Static utilities:IconFont.Exit}"
+                Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+        <Image 
+            Grid.Row="1"
+            Source="{Binding ItemPhoto.Source}" 
+            HeightRequest="450" 
+            VerticalOptions="CenterAndExpand"/>
+        <Label Grid.Row="2" Text="1.0.0 (local) - dev" Style="{StaticResource Version}" VerticalOptions="End"/>
+    </Grid>
+</ContentPage>

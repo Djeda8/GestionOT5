@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.PartesEdicion"
+             xmlns:models="clr-namespace:GestionOT5.MVVM.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodels:PartesEdicionViewModel"
+             x:Class="GestionOT5.MVVM.Pages.PartesEdicion.Tecnicos.TecnicosPage">
+    <Shell.TitleView>
+        <Label
+            Text="Técnicos"
+            Style="{StaticResource Title}"/>
+    </Shell.TitleView>
+    <Grid RowDefinitions="auto,auto,auto,auto,auto,auto,.15*,auto,auto,auto,.15*,auto" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="0" Background="{StaticResource Gray100}">
+        <StackLayout Background="white">
+            <FlexLayout Grid.Row="0" JustifyContent="SpaceBetween" AlignContent="Stretch" Margin="10" >
+                <Button Style="{StaticResource SquareButton}" Command="{Binding GoToParteCommand}" CommandParameter="ParteEPage">
+                    <Button.ImageSource>
+                        <FontImageSource
+                              FontFamily="Icons"
+                              Glyph="{x:Static utilities:IconFont.Left}"
+                              Color="white" />
+                    </Button.ImageSource>
+                </Button>
+                <Button Style="{StaticResource SquareButton}" Command="{Binding GoToIncidenciasCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource
+                              FontFamily="Icons"
+                              Glyph="{x:Static utilities:IconFont.Attention}"
+                              Color="white" />
+                    </Button.ImageSource>
+                </Button>
+                <Button Style="{StaticResource SquareButton}">
+                    <Button.ImageSource>
+                        <FontImageSource
+                              FontFamily="Icons"
+                              Glyph="{x:Static utilities:IconFont.Doc}"
+                              Color="white" />
+                    </Button.ImageSource>
+                </Button>
+                <Button Style="{StaticResource SquareButton}" Command="{Binding GoToParteCommand}" CommandParameter="TecnicosPage">
+                    <Button.ImageSource>
+                        <FontImageSource
+                              FontFamily="Icons"
+                              Glyph="{x:Static utilities:IconFont.Ok}"
+                              Color="white" />
+                    </Button.ImageSource>
+                </Button>
+            </FlexLayout>
+        </StackLayout>
+        <Picker Grid.Row="1"
+                Title="Subfamilia"
+                ItemsSource="{Binding Familias}"
+                ItemDisplayBinding="{Binding CodigoSubfamlia}"
+                SelectedItem="{Binding SelectedFamilia}"/>
+        <HorizontalStackLayout Grid.Row="2" Spacing="3" Margin="0" HorizontalOptions="FillAndExpand">
+            <Label Text="Inicio" Style="{StaticResource FormLabel}" VerticalTextAlignment="Center"></Label>
+            <TimePicker Time="{Binding InicioTec}" ></TimePicker>
+            <Image VerticalOptions="Center">
+                <Image.Source>
+                    <FontImageSource 
+                        Size="30"
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Stopwatch}"
+                        Color="{StaticResource MyComplementary}" />
+                </Image.Source>
+            </Image>
+            <Label Text="Fin" Margin="20,0,0,0" Style="{StaticResource FormLabel}" VerticalTextAlignment="Center"></Label>
+            <TimePicker Time="{Binding FinTec}" ></TimePicker>
+            <Image>
+                <Image.Source>
+                    <FontImageSource
+                        Size="30"
+                        FontFamily="Icons"
+                        Glyph="{x:Static utilities:IconFont.Stopwatch}"
+                        Color="{StaticResource MyComplementary}" />
+                </Image.Source>
+            </Image>
+        </HorizontalStackLayout>
+        <Label Grid.Row="3" Grid.Column="0" Margin="0,10,0,0" Text="Técnicos" Style="{StaticResource FormLabel}" />
+
+        <Picker Grid.Row="4"
+                Title="Tecnico"
+                ItemsSource="{Binding Tecnicos}"
+                ItemDisplayBinding="{Binding Nombre}" 
+                SelectedItem="{Binding SelectedTecnico}"/>
+      
+
+        <HorizontalStackLayout Grid.Row="5"  Spacing="10" Background="White" Padding="10">
+            <Button Style="{StaticResource SquareButton}" Command="{Binding AddTecnicoCommand}">
+                <Button.ImageSource>
+                    <FontImageSource
+                      FontFamily="Icons"
+                      Glyph="{x:Static utilities:IconFont.Cart}"
+                      Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Style="{StaticResource SquareButton}" Command="{Binding DelTecnicoCommand}" >
+                <Button.ImageSource>
+                    <FontImageSource
+                      FontFamily="Icons"
+                      Glyph="{x:Static utilities:IconFont.Delete}"
+                      Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="6"
+                    ItemsSource="{Binding TecnicosImputados}"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding SelectedTecnicoImputado,Mode=TwoWay}"
+                    Background="White"
+                    Margin="0,10,0,0">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+             Orientation="Vertical"
+             VerticalItemSpacing="3">
+                </GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TecnicoImputado">
+                    <Border Padding="0" Margin="10,3,10,0" Style="{StaticResource borderFlashCard}" >
+                        <Grid ColumnDefinitions=".3*,.3*,.3*"
+                     Padding="0"
+                     Margin="15,10,15,0">
+                            <Label Grid.Column="0" Text="{Binding Subfamilia}"/>
+                            <Label Grid.Column="1" Text="{Binding Nombre}"/>
+                            <Label Grid.Column="2" >
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0:00}:{1:00;00}">
+                                        <Binding Path="Tiempo.Hours" />
+                                        <Binding Path="Tiempo.Minutes" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Grid.Row="7" Grid.Column="0" Margin="0,10,0,0" Text="Vehículos" Style="{StaticResource FormLabel}" />
+
+        <Picker Grid.Row="8"
+                    Title="Vehículo"
+                    ItemsSource="{Binding Vehiculos}"
+                    ItemDisplayBinding="{Binding Matricula}" />
+        <HorizontalStackLayout Grid.Row="9"  Spacing="10" Background="White" Padding="10">
+            <Button Style="{StaticResource SquareButton}" Command="{Binding AddMaterialCommand}">
+                <Button.ImageSource>
+                    <FontImageSource
+                          FontFamily="Icons"
+                          Glyph="{x:Static utilities:IconFont.Cart}"
+                          Color="white" />
+                </Button.ImageSource>
+            </Button>
+            <Button Style="{StaticResource SquareButton}" Command="{Binding DelMaterialCommand}" >
+                <Button.ImageSource>
+                    <FontImageSource
+                          FontFamily="Icons"
+                          Glyph="{x:Static utilities:IconFont.Delete}"
+                          Color="white" />
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+
+        <CollectionView Grid.Row="10"
+                        ItemsSource="{Binding MaterialesImputados}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedMaterialImputado,Mode=TwoWay}"
+                        Background="White"
+                        Margin="0,10,0,0">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                     Orientation="Vertical"
+                     VerticalItemSpacing="3">
+                </GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:MaterialImputado">
+                    <Border Padding="0" Margin="10,3,10,0" Style="{StaticResource borderFlashCard}" >
+                        <Grid ColumnDefinitions=".3*,.3*,.3*"
+                              Padding="0"
+                              Margin="15,10,15,0">
+                            <Label Grid.Column="0" Text="{Binding Descripcion}"/>
+                            <Label Grid.Column="1" Text="{Binding Cantidad}"/>
+                            <Label Grid.Column="2" Text="{Binding Unidad}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Label Grid.Row="11" Text="1.0.0 (local) - dev" Style="{StaticResource Version}" VerticalTextAlignment="End" HeightRequest="20" Padding="-5"/>
+    </Grid>
+</ContentPage>

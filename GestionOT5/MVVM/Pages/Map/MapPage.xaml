@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:utilities="clr-namespace:GestionOT5.Utilities"
+             xmlns:viewmodels="clr-namespace:GestionOT5.MVVM.ViewModels.Map"
+             xmlns:models="clr-namespace:GestionOT5.MVVM.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="viewmodels:MapViewModel"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             x:Class="GestionOT5.MVVM.Pages.Map.MapPage">
+    <maps:Map x:Name="map" MapType="Street" >
+        <!--<x:Arguments>
+            <maps:MapSpan >
+                <x:Arguments>
+                    <sensors:Location>
+                        <x:Arguments>
+                            <x:Double>36.9628066</x:Double>
+                            <x:Double>-122.0194722</x:Double>
+                        </x:Arguments>
+                    </sensors:Location>
+                    <x:Double>0.01</x:Double>
+                    <x:Double>0.01</x:Double>
+                </x:Arguments>
+            </maps:MapSpan>
+        </x:Arguments>-->
+     </maps:Map>
+</ContentPage>
